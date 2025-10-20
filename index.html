@@ -1,3 +1,13 @@
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'cd2f9bad24158358abf96db9e4bbdc59',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/cd2f9bad24158358abf96db9e4bbdc59/invoke.js"></script>
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -11,7 +21,7 @@
         :root {
             --golden-color: #FFD700;
             --dark-bg: #00000a; /* Deep night sky */
-            --card-bg: rgba(0, 0, 0, 0.65);
+            --card-bg: rgba(0, 0, 0, 0.7);
         }
 
         body {
@@ -42,8 +52,8 @@
             background-color: var(--card-bg);
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             text-align: center;
             max-width: 480px;
@@ -51,7 +61,14 @@
             animation: fadeIn 1s ease-in-out;
             position: relative;
             z-index: 1;
+            /* For Mobile Scrolling */
+            max-height: 95vh;
+            overflow-y: auto;
         }
+        /* Scrollbar styling for better look */
+        .container::-webkit-scrollbar { width: 5px; }
+        .container::-webkit-scrollbar-thumb { background: var(--golden-color); border-radius: 10px; }
+        .container::-webkit-scrollbar-track { background: transparent; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
@@ -62,7 +79,8 @@
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--golden-color);
-            animation: goldenGlow 2s infinite alternate;
+            /* New animation for main heading */
+            animation: headerPulse 2s infinite alternate;
             margin-bottom: 20px;
         }
         
@@ -77,9 +95,10 @@
         
         .header-symbols { font-size: 1.8rem; vertical-align: middle; }
 
-        @keyframes goldenGlow {
-            from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 30px #ff8c00; }
-            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffae00, 0 0 40px #ff8c00; }
+        /* New animation for main heading, similar to Waheguru text */
+        @keyframes headerPulse {
+            from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 30px #ff8c00; transform: scale(1); }
+            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffae00, 0 0 40px #ff8c00; transform: scale(1.03); }
         }
         
         .image-container { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
@@ -88,8 +107,8 @@
 
         @keyframes blinkingText { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes threeDGlow {
-            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700, 0 0 20px #ffd700, 2px 2px 2px rgba(0,0,0,0.5); transform: rotateY(0deg) translateZ(0); }
-            to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffae00, 0 0 40px #ffae00, -2px -2px 2px rgba(0,0,0,0.5); transform: rotateY(10deg) translateZ(5px); }
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700, 2px 2px 2px rgba(0,0,0,0.5); transform: rotateY(0deg) translateZ(0); }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffae00, -2px -2px 2px rgba(0,0,0,0.5); transform: rotateY(10deg) translateZ(5px); }
         }
         @keyframes glowingBorder {
             from { box-shadow: 0 0 15px #ffd700, 0 0 20px #ffae00; }
@@ -114,17 +133,16 @@
         .create-new-btn { background: linear-gradient(45deg, #ffc107, #ff9800); margin-top: 10px; }
         .hidden { display: none; }
         
-        /* Celebration Animations */
-        .spark, .phooljhari-spark, .fountain-spark { position: absolute; border-radius: 50%; pointer-events: none; }
+        /* Revamped Celebration Animations */
+        .spark { position: absolute; border-radius: 50%; pointer-events: none; }
         .sky-firework-trail { position: absolute; width: 4px; height: 4px; background: white; border-radius: 50%; animation: firework-trail 1.2s ease-out forwards; }
         @keyframes firework-trail { 0% { transform: translateY(0) scale(0.7); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-70vh) scale(1.2); opacity: 0; } }
-        .spark { width: 6px; height: 6px; background: var(--color); box-shadow: 0 0 10px var(--color), 0 0 15px var(--color); animation: spark-burst 1s ease-out forwards; }
+        .spark.sky-burst { width: 6px; height: 6px; background: var(--color); box-shadow: 0 0 10px var(--color), 0 0 15px var(--color); animation: spark-burst 1s ease-out forwards; }
         @keyframes spark-burst { 0% { transform: scale(1); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
-        .phooljhari-stick { position: absolute; width: 5px; height: 100px; background: #444; border-radius: 5px; transform-origin: bottom center; }
-        .phooljhari-spark { background: #FFD700; width: 5px; height: 5px; animation: phooljhari-anim 0.5s ease-out forwards; }
+        .spark.phooljhari { background: #FFD700; width: 5px; height: 5px; animation: phooljhari-anim 0.5s ease-out forwards; }
         @keyframes phooljhari-anim { from { transform: scale(1); opacity: 1; } to { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
-        .fountain-spark { background: linear-gradient(white, #FFD700); animation: fountain-anim 1.5s ease-out forwards; }
-        @keyframes fountain-anim { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(-20vh) scale(0); opacity: 0; } }
+        .spark.fountain { background: linear-gradient(white, #FFD700); animation: fountain-anim 1.5s ease-out forwards; }
+        @keyframes fountain-anim { from { transform: translateY(0) scale(1); opacity: 1; } to { transform: translateY(-25vh) scale(0); opacity: 0; } }
 
         .affiliate-section { margin-top: 30px; border-top: 1px solid var(--golden-color); padding-top: 20px; }
         .affiliate-header { font-size: 1.2rem; color: var(--golden-color); margin-bottom: 15px; }
@@ -192,7 +210,7 @@
             <button id="create-new-btn" class="btn create-new-btn">✨ ਤੁਸੀਂ ਵੀ ਆਪਣੀਆਂ ਸ਼ੁਭਕਾਮਨਾਵਾਂ ਭੇਜੋ</button>
         </div>
         
-        <!-- Affiliate Section (Always Visible) -->
+        <!-- Affiliate Section (Always Visible on both pages) -->
         <div class="affiliate-section">
             <h2 class="affiliate-header">🎁 ਸਾਡੇ ਸੁਝਾਅ 🎁</h2>
             <div class="product-grid">
@@ -214,7 +232,7 @@
             const nameInput = document.getElementById('name-input');
             const wishesHeader = document.getElementById('wishes-header');
             const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
-            const createNewBtn = document.getElementById('create-new-btn'); // New button
+            const createNewBtn = document.getElementById('create-new-btn');
             const subscribeLink = document.getElementById('subscribe-link');
             
             document.querySelectorAll('.wishes-video').forEach(video => {
@@ -246,19 +264,16 @@
                 const name = urlParams.get('name');
                 if (name) {
                     const decodedName = decodeURIComponent(name);
-                    
                     wishesHeader.innerHTML = `<span class="sender-name">${decodedName} ਦੇ ਵੱਲੋਂ</span> ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਲੱਖ ਲੱਖ ਵਧਾਈਆਂ`;
-                    
-                    generatorPage.classList.add('hidden');
-                    wishesPage.classList.remove('hidden');
-                    
+                    generatorPage.style.display = 'none';
+                    wishesPage.style.display = 'block';
                     const generatedLink = window.location.href;
                     const whatsappMessage = `✨ ${decodedName} ਨੇ ਤੁਹਾਨੂੰ ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਸ਼ੁਭਕਾਮਨਾਵਾਂ ਭੇਜੀਆਂ ਹਨ! 🏮 ਦੇਖਣ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ 👉 ${generatedLink}`;
                     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
                     whatsappShareBtn.onclick = () => window.open(whatsappUrl, '_blank');
                 } else {
-                    generatorPage.classList.remove('hidden');
-                    wishesPage.classList.add('hidden');
+                    generatorPage.style.display = 'block';
+                    wishesPage.style.display = 'none';
                 }
             };
 
@@ -273,19 +288,25 @@
                 renderPage();
             });
 
-            // --- NEW BUTTON LOGIC ---
             createNewBtn.addEventListener('click', () => {
-                // Remove the "?name=..." from URL and go back to the generator
                 history.pushState(null, '', window.location.pathname);
-                nameInput.value = ''; // Clear input for the next user
+                nameInput.value = '';
                 renderPage();
             });
             
             window.addEventListener('popstate', renderPage);
 
-            // --- CELEBRATION ANIMATIONS ---
+            // --- REVAMPED CELEBRATION ANIMATIONS ---
             const animationWrapper = document.getElementById('animation-wrapper');
             const fireworkColors = ['#FFD700', '#FF4500', '#1E90FF', '#9932CC', '#FF69B4', '#00FF7F'];
+
+            function createSpark(type, x, y) {
+                const spark = document.createElement('div');
+                spark.className = `spark ${type}`;
+                spark.style.left = `${x}px`;
+                spark.style.top = `${y}px`;
+                return spark;
+            }
 
             function createSkyFirework() {
                 const trail = document.createElement('div');
@@ -294,93 +315,80 @@
                 trail.style.left = `${startX}px`;
                 trail.style.bottom = '0';
                 animationWrapper.appendChild(trail);
+
                 setTimeout(() => {
                     trail.remove();
                     const endY = window.innerHeight * (Math.random() * 0.3 + 0.1);
-                    createBurst(startX, endY);
+                    const particleCount = 50 + Math.floor(Math.random() * 20);
+                    const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+                    for (let i = 0; i < particleCount; i++) {
+                        const spark = createSpark('sky-burst', startX, endY);
+                        spark.style.setProperty('--color', color);
+                        const angle = Math.random() * 360;
+                        const distance = Math.random() * (window.innerWidth / 4.5) + 20;
+                        spark.style.setProperty('--x', `${Math.cos(angle * Math.PI / 180) * distance}px`);
+                        spark.style.setProperty('--y', `${Math.sin(angle * Math.PI / 180) * distance}px`);
+                        animationWrapper.appendChild(spark);
+                        setTimeout(() => spark.remove(), 1000);
+                    }
                 }, 1200);
             }
-
-            function createBurst(x, y) {
-                const particleCount = 40 + Math.floor(Math.random() * 20);
-                const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
-                for (let i = 0; i < particleCount; i++) {
-                    const spark = document.createElement('div');
-                    spark.className = 'spark';
-                    spark.style.left = `${x}px`;
-                    spark.style.top = `${y}px`;
-                    spark.style.setProperty('--color', color);
-                    const angle = Math.random() * 360;
-                    const distance = Math.random() * (window.innerWidth / 5) + 20;
-                    spark.style.setProperty('--x', `${Math.cos(angle * Math.PI / 180) * distance}px`);
-                    spark.style.setProperty('--y', `${Math.sin(angle * Math.PI / 180) * distance}px`);
-                    animationWrapper.appendChild(spark);
-                    setTimeout(() => spark.remove(), 1000);
-                }
-            }
             
-            function createPhooljhari() {
-                const stick = document.createElement('div');
-                stick.className = 'phooljhari-stick';
-                const isLeft = Math.random() > 0.5;
-                stick.style.bottom = '5vh';
-                stick.style.left = isLeft ? '10vw' : '90vw';
-                stick.style.transform = isLeft ? 'rotate(20deg)' : 'rotate(-20deg)';
-                animationWrapper.appendChild(stick);
+            function createPhooljhari(isLeft) {
+                const x = isLeft ? window.innerWidth * 0.15 : window.innerWidth * 0.85;
+                const y = window.innerHeight * 0.8;
                 let sparksCreated = 0;
                 const sparkInterval = setInterval(() => {
-                    for (let i = 0; i < 3; i++) {
-                        const spark = document.createElement('div');
-                        spark.className = 'phooljhari-spark';
-                        spark.style.top = `${stick.offsetTop}px`;
-                        spark.style.left = `${stick.offsetLeft}px`;
-                        const angle = (Math.random() - 0.5) * 120;
-                        const distance = Math.random() * 60 + 10;
+                    if(document.hidden) return;
+                    for (let i = 0; i < 4; i++) {
+                        const spark = createSpark('phooljhari', x, y);
+                        const angle = (Math.random() - 0.5) * 140;
+                        const distance = Math.random() * 80 + 20;
                         spark.style.setProperty('--x', `${Math.sin(angle * Math.PI / 180) * distance}px`);
                         spark.style.setProperty('--y', `${-Math.cos(angle * Math.PI / 180) * distance}px`);
                         animationWrapper.appendChild(spark);
                         setTimeout(() => spark.remove(), 500);
                     }
                     sparksCreated++;
-                    if (sparksCreated > 60) {
-                        clearInterval(sparkInterval);
-                        setTimeout(() => stick.remove(), 500);
-                    }
+                    if (sparksCreated > 60) clearInterval(sparkInterval);
                 }, 50);
             }
 
             function createFountain() {
-                const startX = Math.random() * 60 + 20;
-                const fountainX = `${startX}vw`;
+                const x = window.innerWidth * (Math.random() * 0.5 + 0.25);
+                const y = window.innerHeight;
                 let sparksCreated = 0;
                 const fountainInterval = setInterval(() => {
-                     for (let i = 0; i < 2; i++) {
-                        const spark = document.createElement('div');
-                        spark.className = 'fountain-spark';
-                        const size = Math.random() * 4 + 2;
+                    if(document.hidden) return;
+                     for (let i = 0; i < 3; i++) {
+                        const spark = createSpark('fountain', x + (Math.random() - 0.5) * 30, y);
+                        const size = Math.random() * 5 + 2;
                         spark.style.width = `${size}px`;
                         spark.style.height = `${size}px`;
-                        spark.style.left = `calc(${fountainX} + ${(Math.random() - 0.5) * 20}px)`;
-                        spark.style.bottom = '0';
                         animationWrapper.appendChild(spark);
                         setTimeout(() => spark.remove(), 1500);
                      }
                      sparksCreated++;
-                     if(sparksCreated > 50) { clearInterval(fountainInterval); }
+                     if(sparksCreated > 60) clearInterval(fountainInterval);
                 }, 30);
             }
 
             function startCelebrations() {
+                // More frequent and varied loops
                 (function skyLoop() {
                     if(!document.hidden) createSkyFirework();
-                    setTimeout(skyLoop, 1000 + Math.random() * 1500);
+                    setTimeout(skyLoop, 700 + Math.random() * 800);
                 })();
+
                 (function groundLoop() {
                     if(!document.hidden) {
-                        if (Math.random() > 0.4) createFountain();
-                        else createPhooljhari();
+                        if (Math.random() > 0.5) {
+                            createFountain();
+                        } else {
+                            createPhooljhari(Math.random() > 0.5);
+                        }
                     }
-                    setTimeout(groundLoop, 3000 + Math.random() * 2000);
+                    setTimeout(groundLoop, 2500 + Math.random() * 2000);
                 })();
             }
 
@@ -390,3 +398,13 @@
     </script>
 </body>
 </html>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7898138618598103"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-7898138618598103"
+     data-ad-slot="7875263466"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
