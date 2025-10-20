@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pa">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,32 +10,24 @@
     <style>
         :root {
             --golden-color: #FFD700;
-            --dark-bg: #281c03;
-            --card-bg: rgba(0, 0, 0, 0.7);
-        }
-
-        /* === LAYOUT FIX: Made the body scrollable === */
-        html {
-            scroll-behavior: smooth;
+            --dark-bg: #00000a; /* Deep night sky */
+            --card-bg: rgba(0, 0, 0, 0.65);
         }
 
         body {
             margin: 0;
             font-family: 'Laila', sans-serif;
-            background: linear-gradient(45deg, var(--dark-bg), #140e01, #000000);
-            background-size: cover;
+            background: var(--dark-bg);
             color: #ffffff;
-            /* Flexbox for horizontal centering */
             display: flex;
             justify-content: center;
-            /* Allow vertical scrolling */
+            align-items: center;
             min-height: 100vh;
-            padding: 20px 10px; /* Added horizontal padding */
+            padding: 20px;
             box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow: hidden;
         }
 
-        /* === Animation Wrappers: Placed behind and in front === */
         .animation-wrapper {
             position: fixed;
             top: 0;
@@ -43,21 +35,15 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-        }
-        #background-animation-wrapper {
-            z-index: 0; /* Behind content */
-        }
-        #foreground-animation-wrapper {
-            z-index: 2; /* In front of content */
-            pointer-events: none; /* Allows clicking through it */
+            z-index: 0;
         }
 
         .container {
             background-color: var(--card-bg);
-            padding: 20px;
+            padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
-            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             text-align: center;
             max-width: 480px;
@@ -65,25 +51,31 @@
             animation: fadeIn 1s ease-in-out;
             position: relative;
             z-index: 1;
-            /* Added margin for spacing on scroll */
-            margin: auto 0;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
 
         .header-text {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--golden-color);
             animation: goldenGlow 2s infinite alternate;
             margin-bottom: 20px;
-            line-height: 1.4;
         }
         
-        .header-symbols { font-size: 1.7rem; vertical-align: middle; }
+        #wishes-header .sender-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 0 8px #ffd700;
+        }
+        
+        .header-symbols { font-size: 1.8rem; vertical-align: middle; }
 
         @keyframes goldenGlow {
             from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 30px #ff8c00; }
@@ -91,13 +83,13 @@
         }
         
         .image-container { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
-        .wishes-image { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid var(--golden-color); animation: glowingBorder 2s infinite alternate; }
-        .side-text { font-size: 1.4rem; font-weight: bold; color: var(--golden-color); margin: 0 15px; animation: blinkingText 1.5s infinite, threeDGlow 1.5s infinite alternate; transform-style: preserve-3d; }
+        .wishes-image { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--golden-color); animation: glowingBorder 2s infinite alternate; }
+        .side-text { font-size: 1.5rem; font-weight: bold; color: var(--golden-color); margin: 0 15px; animation: blinkingText 1.5s infinite, threeDGlow 1.5s infinite alternate; transform-style: preserve-3d; }
 
-        @keyframes blinkingText { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes blinkingText { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes threeDGlow {
-            from { text-shadow: 0 0 5px #fff, 0 0 10px #ffd700, 2px 2px 2px rgba(0,0,0,0.5); transform: rotateY(-5deg); }
-            to { text-shadow: 0 0 10px #fff, 0 0 20px #ffae00, -2px -2px 2px rgba(0,0,0,0.5); transform: rotateY(5deg); }
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700, 0 0 20px #ffd700, 2px 2px 2px rgba(0,0,0,0.5); transform: rotateY(0deg) translateZ(0); }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffae00, 0 0 40px #ffae00, -2px -2px 2px rgba(0,0,0,0.5); transform: rotateY(10deg) translateZ(5px); }
         }
         @keyframes glowingBorder {
             from { box-shadow: 0 0 15px #ffd700, 0 0 20px #ffae00; }
@@ -106,13 +98,13 @@
 
         .video-container { width: 80%; max-width: 300px; margin: 0 auto 10px auto; border-radius: 15px; overflow: hidden; background: #000; position: relative; aspect-ratio: 9 / 16; }
         .wishes-video { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
-        .sound-toggle-btn { position: absolute; bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.6); color: white; border: 1px solid white; border-radius: 50%; width: 35px; height: 35px; font-size: 1.3rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; }
+        .sound-toggle-btn { position: absolute; bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.5); color: white; border: 1px solid white; border-radius: 50%; width: 40px; height: 40px; font-size: 1.5rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; padding-bottom: 4px; }
         .audio-prompt { font-size: 0.8rem; margin-top: 0; margin-bottom: 20px; opacity: 0.8; }
 
-        .input-field { width: calc(100% - 24px); padding: 12px; border: 2px solid var(--golden-color); background-color: rgba(0,0,0,0.2); color: #ffffff; border-radius: 10px; font-size: 1rem; margin-bottom: 15px; }
-        .btn { padding: 12px 25px; border: none; border-radius: 10px; background: linear-gradient(45deg, #ffae00, #ffd700); color: #332200; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; box-sizing: border-box; }
-        .btn:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-        .btn:disabled { background: #777; color: #ccc; cursor: not-allowed; opacity: 0.7; }
+        .input-field { width: calc(100% - 24px); padding: 12px; border: 2px solid var(--golden-color); background-color: transparent; color: #ffffff; border-radius: 10px; font-size: 1rem; margin-bottom: 15px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 10px; background: linear-gradient(45deg, #ffae00, #ffd700); color: #332200; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s; width: 100%; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+        .btn:disabled { background: #888; cursor: not-allowed; opacity: 0.7; }
         
         .subscribe-gate { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px; }
         .subscribe-gate p { margin: 0 0 10px 0; font-size: 0.9rem; }
@@ -121,41 +113,85 @@
         .whatsapp-btn { background: linear-gradient(45deg, #25D366, #128C7E); color: white; margin-top: 20px; }
         .hidden { display: none; }
         
-        /* === SMOOTHER ANIMATIONS === */
-        .flower { position: absolute; font-size: 1.8rem; animation: fall 8s linear infinite; opacity: 0.9; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+        /* Celebration Animations */
+        .spark, .phooljhari-spark, .fountain-spark {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
 
-        .rocket { position: absolute; font-size: 2rem; animation: fly-up 3.5s ease-in forwards; bottom: -50px; }
-        @keyframes fly-up { to { transform: translateY(-120vh); } }
-        
-        .particle { position: absolute; border-radius: 50%; animation: crackle 1.2s ease-out forwards; }
-        @keyframes crackle {
-            from { transform: translate(0, 0) scale(1); opacity: 1; }
+        .sky-firework-trail {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: firework-trail 1.2s ease-out forwards;
+        }
+        @keyframes firework-trail {
+            0% { transform: translateY(0) scale(0.7); opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-70vh) scale(1.2); opacity: 0; }
+        }
+
+        .spark { /* Sky burst spark */
+            width: 6px; height: 6px;
+            background: var(--color);
+            box-shadow: 0 0 10px var(--color), 0 0 15px var(--color);
+            animation: spark-burst 1s ease-out forwards;
+        }
+        @keyframes spark-burst {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        .phooljhari-stick {
+            position: absolute;
+            width: 5px; height: 100px;
+            background: #444;
+            border-radius: 5px;
+            transform-origin: bottom center;
+        }
+        .phooljhari-spark {
+            background: #FFD700;
+            width: 5px; height: 5px;
+            animation: phooljhari-anim 0.5s ease-out forwards;
+        }
+        @keyframes phooljhari-anim {
+            from { transform: scale(1); opacity: 1; }
             to { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        .fountain-spark {
+            background: linear-gradient(white, #FFD700);
+            animation: fountain-anim 1.5s ease-out forwards;
+        }
+        @keyframes fountain-anim {
+            from { transform: translateY(0) scale(1); opacity: 1; }
+            to { transform: translateY(-20vh) scale(0); opacity: 0; }
         }
 
         .affiliate-section { margin-top: 30px; border-top: 1px solid var(--golden-color); padding-top: 20px; }
         .affiliate-header { font-size: 1.2rem; color: var(--golden-color); margin-bottom: 15px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-        .product-card { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 10px; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-        .product-card p { font-size: 0.8rem; margin: 0 0 10px 0; height: 35px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .product-card { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 10px; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+        .product-card p { font-size: 0.85rem; margin: 0 0 10px 0; height: 40px; }
         .product-card a { text-decoration: none; color: #332200; background: var(--golden-color); padding: 8px; border-radius: 5px; display: block; font-size: 0.9rem; }
 
-        /* === MOBILE FRIENDLY ADJUSTMENTS === */
-        @media (max-width: 480px) {
-            body { padding: 15px 5px; }
+        @media (max-width: 500px) {
+            .header-text { font-size: 1.2rem; }
+            #wishes-header .sender-name { font-size: 1.1rem; }
             .container { padding: 15px; }
-            .header-text { font-size: 1.3rem; }
-            .side-text { font-size: 1.1rem; margin: 0 8px;}
+            .side-text { font-size: 1.2rem; margin: 0 10px;}
             .wishes-image { width: 90px; height: 90px; }
+            .product-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="animation-wrapper" id="background-animation-wrapper"></div>
-    <div class="animation-wrapper" id="foreground-animation-wrapper"></div>
+    <div class="animation-wrapper" id="animation-wrapper"></div>
 
     <div class="container">
         <!-- Generator Page View -->
@@ -223,7 +259,6 @@
             const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
             const subscribeLink = document.getElementById('subscribe-link');
             
-            // Video play/pause on click
             document.querySelectorAll('.wishes-video').forEach(video => {
                 video.addEventListener('click', () => {
                     if (video.paused) video.play();
@@ -231,7 +266,6 @@
                 });
             });
 
-            // Sound toggle
             document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -242,26 +276,28 @@
                 });
             });
 
-            // Subscription logic
             subscribeLink.addEventListener('click', () => {
                  setTimeout(() => {
                     generateBtn.disabled = false;
-                    generateBtn.style.background = 'linear-gradient(45deg, #ffae00, #ffd700)';
                     alert("ਤੁਹਾਡਾ ਧੰਨਵਾਦ! ਹੁਣ ਤੁਸੀਂ ਲਿੰਕ ਬਣਾ ਸਕਦੇ ਹੋ।");
                  }, 1000); 
             });
             
-            // Page rendering logic
             const renderPage = () => {
                 const urlParams = new URLSearchParams(window.location.search);
                 const name = urlParams.get('name');
                 if (name) {
                     const decodedName = decodeURIComponent(name);
-                    wishesHeader.innerHTML = `<span class="header-symbols">ੴ</span> ${decodedName}, ਤੁਹਾਨੂੰ ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਬਹੁਤ ਬਹੁਤ ਮੁਬਾਰਕਾਂ <span class="header-symbols">☬</span>`;
+                    
+                    // --- MISTAKE CORRECTED HERE ---
+                    wishesHeader.innerHTML = `<span class="sender-name">${decodedName} ਦੇ ਵੱਲੋਂ</span> ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਲੱਖ ਲੱਖ ਵਧਾਈਆਂ`;
+                    
                     generatorPage.classList.add('hidden');
                     wishesPage.classList.remove('hidden');
+                    
+                    // Update WhatsApp share message
                     const generatedLink = window.location.href;
-                    const whatsappMessage = `🎊 ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਮੁਬਾਰਕਾਂ! ਮੇਰਾ ਵਿਸ਼ੇਸ਼ ਲਿੰਕ ਵੇਖੋ 👉 ${generatedLink}`;
+                    const whatsappMessage = `✨ ${decodedName} ਨੇ ਤੁਹਾਨੂੰ ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਸ਼ੁਭਕਾਮਨਾਵਾਂ ਭੇਜੀਆਂ ਹਨ! 🏮 ਦੇਖਣ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ 👉 ${generatedLink}`;
                     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
                     whatsappShareBtn.onclick = () => window.open(whatsappUrl, '_blank');
                 } else {
@@ -270,7 +306,6 @@
                 }
             };
 
-            // Generate link button
             generateBtn.addEventListener('click', () => {
                 const name = nameInput.value.trim();
                 if (name === "") {
@@ -284,66 +319,120 @@
             
             window.addEventListener('popstate', renderPage);
 
-            // --- Animation Logic ---
-            const bgWrapper = document.getElementById('background-animation-wrapper');
-            const fgWrapper = document.getElementById('foreground-animation-wrapper');
+            // --- CELEBRATION ANIMATIONS ---
+            const animationWrapper = document.getElementById('animation-wrapper');
+            const fireworkColors = ['#FFD700', '#FF4500', '#1E90FF', '#9932CC', '#FF69B4', '#00FF7F'];
 
-            function createAnimations() {
-                // Front-falling Flowers
-                const flowers = ['🌸', '🌺', '🌼', '🌷', '🌻'];
-                setInterval(() => {
-                    if (document.hidden) return;
-                    const flower = document.createElement('div');
-                    flower.className = 'flower';
-                    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
-                    flower.style.left = `${Math.random() * 100}vw`;
-                    flower.style.animationDuration = `${Math.random() * 5 + 6}s`;
-                    fgWrapper.appendChild(flower);
-                    setTimeout(() => flower.remove(), 11000);
-                }, 900);
+            function createSkyFirework() {
+                const trail = document.createElement('div');
+                trail.className = 'sky-firework-trail';
+                const startX = Math.random() * window.innerWidth;
+                trail.style.left = `${startX}px`;
+                trail.style.bottom = '0';
+                animationWrapper.appendChild(trail);
 
-                // Rockets & Fireworks
-                setInterval(() => {
-                    if (document.hidden) return;
-                    const rocket = document.createElement('div');
-                    rocket.className = 'rocket';
-                    rocket.innerText = '🚀';
-                    const startX = Math.random() * 100;
-                    rocket.style.left = `${startX}vw`;
-                    bgWrapper.appendChild(rocket);
-                    setTimeout(() => {
-                        rocket.remove();
-                        const endY = window.innerHeight * (0.1 + Math.random() * 0.2);
-                        createFireworks(window.innerWidth * (startX / 100), endY);
-                    }, 3400);
-                }, 2800);
+                setTimeout(() => {
+                    trail.remove();
+                    const endY = window.innerHeight * (Math.random() * 0.3 + 0.1);
+                    createBurst(startX, endY);
+                }, 1200);
             }
 
-            function createFireworks(x, y) {
-                for (let i = 0; i < 35; i++) { // Reduced particle count slightly for performance
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
-                    const size = Math.random() * 2.5 + 1;
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    
+            function createBurst(x, y) {
+                const particleCount = 40 + Math.floor(Math.random() * 20);
+                const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+                for (let i = 0; i < particleCount; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'spark';
+                    spark.style.left = `${x}px`;
+                    spark.style.top = `${y}px`;
+                    spark.style.setProperty('--color', color);
                     const angle = Math.random() * 360;
-                    const distance = Math.random() * 90 + 50;
-                    particle.style.setProperty('--x', `${Math.cos(angle * Math.PI / 180) * distance}px`);
-                    particle.style.setProperty('--y', `${Math.sin(angle * Math.PI / 180) * distance}px`);
-                    
-                    particle.style.left = `${x}px`;
-                    particle.style.top = `${y}px`;
-                    
-                    bgWrapper.appendChild(particle);
-                    setTimeout(() => particle.remove(), 1200);
+                    const distance = Math.random() * (window.innerWidth / 5) + 20;
+                    spark.style.setProperty('--x', `${Math.cos(angle * Math.PI / 180) * distance}px`);
+                    spark.style.setProperty('--y', `${Math.sin(angle * Math.PI / 180) * distance}px`);
+                    animationWrapper.appendChild(spark);
+                    setTimeout(() => spark.remove(), 1000);
                 }
             }
+            
+            function createPhooljhari() {
+                const stick = document.createElement('div');
+                stick.className = 'phooljhari-stick';
+                const isLeft = Math.random() > 0.5;
+                stick.style.bottom = '5vh';
+                stick.style.left = isLeft ? '10vw' : '90vw';
+                stick.style.transform = isLeft ? 'rotate(20deg)' : 'rotate(-20deg)';
+                animationWrapper.appendChild(stick);
 
-            // Initial Setup
+                let sparksCreated = 0;
+                const sparkInterval = setInterval(() => {
+                    const sparkCount = 3 + Math.floor(Math.random() * 3);
+                    for (let i = 0; i < sparkCount; i++) {
+                        const spark = document.createElement('div');
+                        spark.className = 'phooljhari-spark';
+                        spark.style.top = `${stick.offsetTop}px`;
+                        spark.style.left = `${stick.offsetLeft}px`;
+                        const angle = (Math.random() - 0.5) * 120;
+                        const distance = Math.random() * 60 + 10;
+                        spark.style.setProperty('--x', `${Math.sin(angle * Math.PI / 180) * distance}px`);
+                        spark.style.setProperty('--y', `${-Math.cos(angle * Math.PI / 180) * distance}px`);
+                        animationWrapper.appendChild(spark);
+                        setTimeout(() => spark.remove(), 500);
+                    }
+                    sparksCreated++;
+                    if (sparksCreated > 60) {
+                        clearInterval(sparkInterval);
+                        setTimeout(() => stick.remove(), 500);
+                    }
+                }, 50);
+            }
+
+            function createFountain() {
+                const startX = Math.random() * 60 + 20;
+                const fountainX = `${startX}vw`;
+                
+                let sparksCreated = 0;
+                const fountainInterval = setInterval(() => {
+                    const sparkCount = 2 + Math.floor(Math.random() * 2);
+                     for (let i = 0; i < sparkCount; i++) {
+                        const spark = document.createElement('div');
+                        spark.className = 'fountain-spark';
+                        const size = Math.random() * 4 + 2;
+                        spark.style.width = `${size}px`;
+                        spark.style.height = `${size}px`;
+                        spark.style.left = `calc(${fountainX} + ${(Math.random() - 0.5) * 20}px)`;
+                        spark.style.bottom = '0';
+                        animationWrapper.appendChild(spark);
+                        setTimeout(() => spark.remove(), 1500);
+                     }
+                     sparksCreated++;
+                     if(sparksCreated > 50) {
+                         clearInterval(fountainInterval);
+                     }
+                }, 30);
+            }
+
+            function startCelebrations() {
+                (function skyLoop() {
+                    if(!document.hidden) createSkyFirework();
+                    setTimeout(skyLoop, 1000 + Math.random() * 1500);
+                })();
+
+                (function groundLoop() {
+                    if(!document.hidden) {
+                        if (Math.random() > 0.4) {
+                            createFountain();
+                        } else {
+                            createPhooljhari();
+                        }
+                    }
+                    setTimeout(groundLoop, 3000 + Math.random() * 2000);
+                })();
+            }
+
             renderPage();
-            createAnimations();
+            startCelebrations();
         });
     </script>
 </body>
