@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandi Chhor Divas & Diwali Wishes Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --golden-color: #FFD700;
+            --dark-bg: #281c03;
+            --card-bg: rgba(0, 0, 0, 0.7);
+        }
+
+        /* === LAYOUT FIX: Made the body scrollable === */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Laila', sans-serif;
+            background: linear-gradient(45deg, var(--dark-bg), #140e01, #000000);
+            background-size: cover;
+            color: #ffffff;
+            /* Flexbox for horizontal centering */
+            display: flex;
+            justify-content: center;
+            /* Allow vertical scrolling */
+            min-height: 100vh;
+            padding: 20px 10px; /* Added horizontal padding */
+            box-sizing: border-box;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* === Animation Wrappers: Placed behind and in front === */
+        .animation-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #background-animation-wrapper {
+            z-index: 0; /* Behind content */
+        }
+        #foreground-animation-wrapper {
+            z-index: 2; /* In front of content */
+            pointer-events: none; /* Allows clicking through it */
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.25);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            z-index: 1;
+            /* Added margin for spacing on scroll */
+            margin: auto 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .header-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--golden-color);
+            animation: goldenGlow 2s infinite alternate;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .header-symbols { font-size: 1.7rem; vertical-align: middle; }
+
+        @keyframes goldenGlow {
+            from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 30px #ff8c00; }
+            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffae00, 0 0 40px #ff8c00; }
+        }
+        
+        .image-container { display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+        .wishes-image { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid var(--golden-color); animation: glowingBorder 2s infinite alternate; }
+        .side-text { font-size: 1.4rem; font-weight: bold; color: var(--golden-color); margin: 0 15px; animation: blinkingText 1.5s infinite, threeDGlow 1.5s infinite alternate; transform-style: preserve-3d; }
+
+        @keyframes blinkingText { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes threeDGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #ffd700, 2px 2px 2px rgba(0,0,0,0.5); transform: rotateY(-5deg); }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ffae00, -2px -2px 2px rgba(0,0,0,0.5); transform: rotateY(5deg); }
+        }
+        @keyframes glowingBorder {
+            from { box-shadow: 0 0 15px #ffd700, 0 0 20px #ffae00; }
+            to { box-shadow: 0 0 25px #ffd700, 0 0 35px #ffae00; }
+        }
+
+        .video-container { width: 80%; max-width: 300px; margin: 0 auto 10px auto; border-radius: 15px; overflow: hidden; background: #000; position: relative; aspect-ratio: 9 / 16; }
+        .wishes-video { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+        .sound-toggle-btn { position: absolute; bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.6); color: white; border: 1px solid white; border-radius: 50%; width: 35px; height: 35px; font-size: 1.3rem; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; }
+        .audio-prompt { font-size: 0.8rem; margin-top: 0; margin-bottom: 20px; opacity: 0.8; }
+
+        .input-field { width: calc(100% - 24px); padding: 12px; border: 2px solid var(--golden-color); background-color: rgba(0,0,0,0.2); color: #ffffff; border-radius: 10px; font-size: 1rem; margin-bottom: 15px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 10px; background: linear-gradient(45deg, #ffae00, #ffd700); color: #332200; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; box-sizing: border-box; }
+        .btn:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+        .btn:disabled { background: #777; color: #ccc; cursor: not-allowed; opacity: 0.7; }
+        
+        .subscribe-gate { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .subscribe-gate p { margin: 0 0 10px 0; font-size: 0.9rem; }
+        .subscribe-btn { background: #ff0000; color: white; margin-bottom: 15px; }
+        
+        .whatsapp-btn { background: linear-gradient(45deg, #25D366, #128C7E); color: white; margin-top: 20px; }
+        .hidden { display: none; }
+        
+        /* === SMOOTHER ANIMATIONS === */
+        .flower { position: absolute; font-size: 1.8rem; animation: fall 8s linear infinite; opacity: 0.9; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+        .rocket { position: absolute; font-size: 2rem; animation: fly-up 3.5s ease-in forwards; bottom: -50px; }
+        @keyframes fly-up { to { transform: translateY(-120vh); } }
+        
+        .particle { position: absolute; border-radius: 50%; animation: crackle 1.2s ease-out forwards; }
+        @keyframes crackle {
+            from { transform: translate(0, 0) scale(1); opacity: 1; }
+            to { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        .affiliate-section { margin-top: 30px; border-top: 1px solid var(--golden-color); padding-top: 20px; }
+        .affiliate-header { font-size: 1.2rem; color: var(--golden-color); margin-bottom: 15px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+        .product-card { background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 10px; transition: transform 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+        .product-card p { font-size: 0.8rem; margin: 0 0 10px 0; height: 35px; }
+        .product-card a { text-decoration: none; color: #332200; background: var(--golden-color); padding: 8px; border-radius: 5px; display: block; font-size: 0.9rem; }
+
+        /* === MOBILE FRIENDLY ADJUSTMENTS === */
+        @media (max-width: 480px) {
+            body { padding: 15px 5px; }
+            .container { padding: 15px; }
+            .header-text { font-size: 1.3rem; }
+            .side-text { font-size: 1.1rem; margin: 0 8px;}
+            .wishes-image { width: 90px; height: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animation-wrapper" id="background-animation-wrapper"></div>
+    <div class="animation-wrapper" id="foreground-animation-wrapper"></div>
+
+    <div class="container">
+        <!-- Generator Page View -->
+        <div id="generator-page">
+            <h1 class="header-text">
+                <span class="header-symbols">ੴ</span> ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਬਹੁਤ ਬਹੁਤ ਮੁਬਾਰਕਾਂ <span class="header-symbols">☬</span>
+            </h1>
+            <div class="image-container">
+                <span class="side-text">ਵਾਹਿਗੁਰੂ ਜੀ</span>
+                <img src="Bandichod.jpg" alt="Bandi Chhor Divas" class="wishes-image">
+                <span class="side-text">ਵਾਹਿਗੁਰੂ ਜੀ</span>
+            </div>
+            <div class="video-container">
+                <video id="video-player-gen" class="wishes-video" src="Bandichod.mp4" autoplay muted loop playsinline></video>
+                <button class="sound-toggle-btn" data-video-id="video-player-gen">🔇</button>
+            </div>
+            <p class="audio-prompt">ਆਵਾਜ਼ ਲਈ 🔇 ਆਈਕਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ</p>
+            
+            <div class="subscribe-gate">
+                <p>ਲਿੰਕ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਸਾਡੇ ਯੂਟਿਊਬ ਚੈਨਲ ਨੂੰ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ!</p>
+                <a href="https://youtube.com/@joshuatvrecords?si=ra1PpZ3_tlXPHDuV" target="_blank" class="btn subscribe-btn" id="subscribe-link">ਚੈਨਲ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ</a>
+            </div>
+            
+            <input type="text" id="name-input" class="input-field" placeholder="ਆਪਣਾ ਨਾਮ ਲਿਖੋ">
+            <button id="generate-btn" class="btn" disabled>ਲਿੰਕ ਬਣਾਓ</button>
+        </div>
+
+        <!-- Wishes Page View -->
+        <div id="wishes-page" class="hidden">
+            <h1 id="wishes-header" class="header-text"></h1>
+            <div class="image-container">
+                <span class="side-text">ਵਾਹਿਗੁਰੂ ਜੀ</span>
+                <img src="Bandichod.jpg" alt="Bandi Chhor Divas" class="wishes-image">
+                <span class="side-text">ਵਾਹਿਗੁਰੂ ਜੀ</span>
+            </div>
+            <div class="video-container">
+                <video id="video-player-wish" class="wishes-video" src="Bandichod.mp4" autoplay muted loop playsinline></video>
+                <button class="sound-toggle-btn" data-video-id="video-player-wish">🔇</button>
+            </div>
+            <p class="audio-prompt">ਆਵਾਜ਼ ਲਈ 🔇 ਆਈਕਨ 'ਤੇ ਕਲਿੱਕ ਕਰੋ</p>
+            <button id="whatsapp-share-btn" class="btn whatsapp-btn">🎉 WhatsApp 'ਤੇ ਸਾਂਝਾ ਕਰੋ</button>
+        </div>
+        
+        <!-- Affiliate Section (Always Visible) -->
+        <div class="affiliate-section">
+            <h2 class="affiliate-header">🎁 ਸਾਡੇ ਸੁਝਾਅ 🎁</h2>
+            <div class="product-grid">
+                 <div class="product-card"> <img src="GuruNanakDevji.jpg" alt="Guru Nanak Dev Ji Photo"> <p>Guru Nanak Dev Ji Photo Frame</p> <a href="https://amzn.to/3WbMQ5J" target="_blank">ਹੁਣੇ ਖਰੀਦੋ</a> </div>
+                 <div class="product-card"> <img src="ekonkarWall.jpg" alt="Ek Onkar Wall Decor"> <p>Ek Onkar Wall Decor</p> <a href="https://amzn.to/46ZIWD7" target="_blank">ਹੁਣੇ ਖਰੀਦੋ</a> </div>
+                 <div class="product-card"> <img src="SikhMoolMantra.jpg" alt="Sikh Mool Mantra"> <p>Sikh Mool Mantra Wall Art</p> <a href="https://amzn.to/47EhF8v" target="_blank">ਹੁਣੇ ਖਰੀਦੋ</a> </div>
+                 <div class="product-card"> <img src="GodLamps.jpg" alt="Divine God Lamps"> <p>Divine God Lamps</p> <a href="https://amzn.to/4nSqa6y" target="_blank">ਹੁਣੇ ਖਰੀਦੋ</a> </div>
+                 <div class="product-card"> <img src="WaheGuruJiPunjabiKhanda.jpg" alt="Waheguru Ji Punjabi Khanda"> <p>Waheguru Ji Punjabi Khanda</p> <a href="https://amzn.to/4nZZQHT" target="_blank">ਹੁਣੇ ਖਰੀਦੋ</a> </div>
+                 <div class="product-card"> <img src="24KGoldenTemple.jpg" alt="24K Golden Temple"> <p>24K Gold Plated Golden Temple</p> <a href="https://amzn.to/4na5HZJ" target="_blank">ਹੁਣੇ ਖਰੀਦੋ</a> </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generatorPage = document.getElementById('generator-page');
+            const wishesPage = document.getElementById('wishes-page');
+            const generateBtn = document.getElementById('generate-btn');
+            const nameInput = document.getElementById('name-input');
+            const wishesHeader = document.getElementById('wishes-header');
+            const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
+            const subscribeLink = document.getElementById('subscribe-link');
+            
+            // Video play/pause on click
+            document.querySelectorAll('.wishes-video').forEach(video => {
+                video.addEventListener('click', () => {
+                    if (video.paused) video.play();
+                    else video.pause();
+                });
+            });
+
+            // Sound toggle
+            document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const videoId = btn.dataset.videoId;
+                    const video = document.getElementById(videoId);
+                    video.muted = !video.muted;
+                    btn.textContent = video.muted ? '🔇' : '🔊';
+                });
+            });
+
+            // Subscription logic
+            subscribeLink.addEventListener('click', () => {
+                 setTimeout(() => {
+                    generateBtn.disabled = false;
+                    generateBtn.style.background = 'linear-gradient(45deg, #ffae00, #ffd700)';
+                    alert("ਤੁਹਾਡਾ ਧੰਨਵਾਦ! ਹੁਣ ਤੁਸੀਂ ਲਿੰਕ ਬਣਾ ਸਕਦੇ ਹੋ।");
+                 }, 1000); 
+            });
+            
+            // Page rendering logic
+            const renderPage = () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const name = urlParams.get('name');
+                if (name) {
+                    const decodedName = decodeURIComponent(name);
+                    wishesHeader.innerHTML = `<span class="header-symbols">ੴ</span> ${decodedName}, ਤੁਹਾਨੂੰ ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਬਹੁਤ ਬਹੁਤ ਮੁਬਾਰਕਾਂ <span class="header-symbols">☬</span>`;
+                    generatorPage.classList.add('hidden');
+                    wishesPage.classList.remove('hidden');
+                    const generatedLink = window.location.href;
+                    const whatsappMessage = `🎊 ਬੰਦੀ ਛੋੜ ਦਿਵਸ ਅਤੇ ਦੀਵਾਲੀ ਦੀਆਂ ਮੁਬਾਰਕਾਂ! ਮੇਰਾ ਵਿਸ਼ੇਸ਼ ਲਿੰਕ ਵੇਖੋ 👉 ${generatedLink}`;
+                    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+                    whatsappShareBtn.onclick = () => window.open(whatsappUrl, '_blank');
+                } else {
+                    generatorPage.classList.remove('hidden');
+                    wishesPage.classList.add('hidden');
+                }
+            };
+
+            // Generate link button
+            generateBtn.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                if (name === "") {
+                    alert("ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਨਾਮ ਦਰਜ ਕਰੋ!");
+                    return;
+                }
+                const newUrl = `${window.location.pathname}?name=${encodeURIComponent(name)}`;
+                history.pushState({ name: name }, '', newUrl);
+                renderPage();
+            });
+            
+            window.addEventListener('popstate', renderPage);
+
+            // --- Animation Logic ---
+            const bgWrapper = document.getElementById('background-animation-wrapper');
+            const fgWrapper = document.getElementById('foreground-animation-wrapper');
+
+            function createAnimations() {
+                // Front-falling Flowers
+                const flowers = ['🌸', '🌺', '🌼', '🌷', '🌻'];
+                setInterval(() => {
+                    if (document.hidden) return;
+                    const flower = document.createElement('div');
+                    flower.className = 'flower';
+                    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+                    flower.style.left = `${Math.random() * 100}vw`;
+                    flower.style.animationDuration = `${Math.random() * 5 + 6}s`;
+                    fgWrapper.appendChild(flower);
+                    setTimeout(() => flower.remove(), 11000);
+                }, 900);
+
+                // Rockets & Fireworks
+                setInterval(() => {
+                    if (document.hidden) return;
+                    const rocket = document.createElement('div');
+                    rocket.className = 'rocket';
+                    rocket.innerText = '🚀';
+                    const startX = Math.random() * 100;
+                    rocket.style.left = `${startX}vw`;
+                    bgWrapper.appendChild(rocket);
+                    setTimeout(() => {
+                        rocket.remove();
+                        const endY = window.innerHeight * (0.1 + Math.random() * 0.2);
+                        createFireworks(window.innerWidth * (startX / 100), endY);
+                    }, 3400);
+                }, 2800);
+            }
+
+            function createFireworks(x, y) {
+                for (let i = 0; i < 35; i++) { // Reduced particle count slightly for performance
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                    const size = Math.random() * 2.5 + 1;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    const angle = Math.random() * 360;
+                    const distance = Math.random() * 90 + 50;
+                    particle.style.setProperty('--x', `${Math.cos(angle * Math.PI / 180) * distance}px`);
+                    particle.style.setProperty('--y', `${Math.sin(angle * Math.PI / 180) * distance}px`);
+                    
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    
+                    bgWrapper.appendChild(particle);
+                    setTimeout(() => particle.remove(), 1200);
+                }
+            }
+
+            // Initial Setup
+            renderPage();
+            createAnimations();
+        });
+    </script>
+</body>
+</html>
