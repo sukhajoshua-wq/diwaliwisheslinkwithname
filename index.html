@@ -353,4 +353,40 @@
                 const startX = Math.random() * 60 + 20;
                 const fountainX = `${startX}vw`;
                 let sparksCreated = 0;
-                const fount
+                const fountainInterval = setInterval(() => {
+                     for (let i = 0; i < 2; i++) {
+                        const spark = document.createElement('div');
+                        spark.className = 'fountain-spark';
+                        const size = Math.random() * 4 + 2;
+                        spark.style.width = `${size}px`;
+                        spark.style.height = `${size}px`;
+                        spark.style.left = `calc(${fountainX} + ${(Math.random() - 0.5) * 20}px)`;
+                        spark.style.bottom = '0';
+                        animationWrapper.appendChild(spark);
+                        setTimeout(() => spark.remove(), 1500);
+                     }
+                     sparksCreated++;
+                     if(sparksCreated > 50) { clearInterval(fountainInterval); }
+                }, 30);
+            }
+
+            function startCelebrations() {
+                (function skyLoop() {
+                    if(!document.hidden) createSkyFirework();
+                    setTimeout(skyLoop, 1000 + Math.random() * 1500);
+                })();
+                (function groundLoop() {
+                    if(!document.hidden) {
+                        if (Math.random() > 0.4) createFountain();
+                        else createPhooljhari();
+                    }
+                    setTimeout(groundLoop, 3000 + Math.random() * 2000);
+                })();
+            }
+
+            renderPage();
+            startCelebrations();
+        });
+    </script>
+</body>
+</html>
